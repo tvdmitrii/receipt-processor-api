@@ -1,4 +1,4 @@
-package com.turygin;
+package com.turygin.resource;
 
 import jakarta.ws.rs.GET;
 import jakarta.ws.rs.Path;
@@ -11,9 +11,9 @@ import org.apache.logging.log4j.Logger;
  * Root resource (exposed at "myresource" path)
  */
 @Path("myresource")
-public class MyResource {
+public class MyResource extends DataStoreResource {
 
-    protected static final Logger LOG = LogManager.getLogger(MyResource.class);
+    private static final Logger LOG = LogManager.getLogger(MyResource.class);
 
     /**
      * Method handling HTTP GET requests. The returned object will be sent
