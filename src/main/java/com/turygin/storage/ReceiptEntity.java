@@ -13,6 +13,8 @@ public class ReceiptEntity {
     private List<ItemEntity> items = new ArrayList<>();
     private BigDecimal total;
 
+    public ReceiptEntity() {}
+
     public ReceiptEntity(String retailer, LocalDate purchaseDate, LocalTime purchaseTime, BigDecimal total) {
         this.retailer = retailer;
         this.purchaseDate = purchaseDate;

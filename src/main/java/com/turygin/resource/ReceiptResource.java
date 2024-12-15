@@ -1,6 +1,7 @@
 package com.turygin.resource;
 
 import com.turygin.model.*;
+import com.turygin.storage.ReceiptEntity;
 import com.turygin.storage.ReceiptManager;
 import jakarta.ws.rs.*;
 import jakarta.ws.rs.core.MediaType;
@@ -29,22 +30,37 @@ public class ReceiptResource extends DataStoreResource {
     @Produces(MediaType.APPLICATION_JSON)
     @Path("process")
     public Response processReceipt(Receipt receipt) {
-        // TODO: validate input
-        UUID id = UUID.randomUUID();
-        ReceiptManager receiptManager = DATA_STORE.getReceiptManager();
-        receiptManager.addReceipt(id, receipt);
+        try {
+            ReceiptEntity receiptEntity = Mapper.toReceiptEntity(receipt);
 
-        return Response.ok(new ReceiptId(id)).build();
+            UUID id = UUID.randomUUID();
+            ReceiptManager receiptManager = DATA_STORE.getReceiptManager();
+            receiptManager.addReceipt(id, receiptEntity);
+
+            return Response.ok(new ReceiptId(id)).build();
+        } catch (Exception e) {
+            LOG.error(e);
+            return makeBadRequestResponse();
+        }
     }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     @Path("{id}/points")
-    public Response getPoints(@PathParam("id") UUID id) {
-        ReceiptManager receiptManager = DATA_STORE.getReceiptManager();
-        Receipt receipt = receiptManager.getReceipt(id);
+    public Response getPoints(@PathParam("id") String id) {
 
-        if (receipt == null) {
+        UUID uuid;
+        try {
+            uuid = Validator.validateUUID(id);
+        } catch (Exception e) {
+            LOG.error(e);
+            return makeNotFoundResponse();
+        }
+
+        ReceiptManager receiptManager = DATA_STORE.getReceiptManager();
+        ReceiptEntity receiptEntity = receiptManager.getReceipt(uuid);
+
+        if (receiptEntity == null) {
             return makeNotFoundResponse();
         }
 

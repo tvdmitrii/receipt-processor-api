@@ -6,6 +6,8 @@ public class ItemEntity {
     private String shortDescription;
     private BigDecimal price;
 
+    public ItemEntity() {}
+
     public ItemEntity(String shortDescription, BigDecimal price) {
         this.shortDescription = shortDescription;
         this.price = price;
