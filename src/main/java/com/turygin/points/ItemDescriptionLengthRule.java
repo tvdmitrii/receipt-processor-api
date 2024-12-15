@@ -8,12 +8,12 @@ import java.math.RoundingMode;
 
 public class ItemDescriptionLengthRule implements IPointRule {
 
-    private final int lengthMultiple;
+    private final long lengthMultiple;
     private final BigDecimal priceMultiplier;
 
-    public ItemDescriptionLengthRule(int lengthMultiple, String priceMultiplier) {
+    public ItemDescriptionLengthRule(long lengthMultiple, BigDecimal priceMultiplier) {
         this.lengthMultiple = lengthMultiple;
-        this.priceMultiplier = new BigDecimal(priceMultiplier);
+        this.priceMultiplier = priceMultiplier;
     }
 
     @Override

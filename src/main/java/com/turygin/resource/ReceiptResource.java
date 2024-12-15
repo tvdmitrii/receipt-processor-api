@@ -1,6 +1,7 @@
 package com.turygin.resource;
 
 import com.turygin.model.*;
+import com.turygin.points.PointPipeline;
 import com.turygin.storage.ReceiptEntity;
 import com.turygin.storage.ReceiptManager;
 import jakarta.ws.rs.*;
@@ -64,8 +65,8 @@ public class ReceiptResource extends DataStoreResource {
             return makeNotFoundResponse();
         }
 
-        // TODO: compute the number of points
-        long points = 0;
+        PointPipeline pointPipeline = DATA_STORE.getPointPipeline();
+        long points = pointPipeline.compute(receiptEntity);
 
         return Response.ok(new Points(points)).build();
     }

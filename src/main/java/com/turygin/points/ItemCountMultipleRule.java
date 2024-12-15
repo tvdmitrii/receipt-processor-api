@@ -4,16 +4,16 @@ import com.turygin.storage.ReceiptEntity;
 
 public class ItemCountMultipleRule implements IPointRule {
 
-    private final long pointsPerPair;
-    private final int count;
+    private final long pointsPerGroup;
+    private final long groupSize;
 
-    public ItemCountMultipleRule(long pointsPerPair, int count) {
-        this.pointsPerPair = pointsPerPair;
-        this.count = count;
+    public ItemCountMultipleRule(long pointsPerGroup, long groupSize) {
+        this.pointsPerGroup = pointsPerGroup;
+        this.groupSize = groupSize;
     }
 
     @Override
     public Long compute(ReceiptEntity receipt) {
-        return receipt.getItems().size() / count * pointsPerPair;
+        return receipt.getItems().size() / groupSize * pointsPerGroup;
     }
 }

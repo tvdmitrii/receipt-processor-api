@@ -1,7 +1,7 @@
 package com.turygin.resource;
 
-import com.turygin.storage.DataStore;
+import com.turygin.storage.Config;
 
 public class DataStoreResource {
-    protected final DataStore DATA_STORE = DataStore.getInstance();
+    protected final Config DATA_STORE = Config.getInstance();
 }
