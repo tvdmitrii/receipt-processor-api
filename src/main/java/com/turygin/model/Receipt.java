@@ -10,6 +10,8 @@ public class Receipt {
     public List<Item> items = new ArrayList<>();
     public String total;
 
+    public Receipt() {}
+
     public Receipt(String retailer, String purchaseDate, String purchaseTime, String total) {
         this.retailer = retailer;
         this.purchaseDate = purchaseDate;
