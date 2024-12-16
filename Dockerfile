@@ -1,12 +1,9 @@
-# Get source code from GitHub repository
-FROM alpine/git:latest AS source
-WORKDIR /source
-RUN git clone https://github.com/tvdmitrii/receipt-processor-api.git
-
-# Use Maven to build the code
+# Maven Build Stage
 FROM maven:3.9.9-eclipse-temurin-21-alpine AS build
 WORKDIR /build
-COPY --from=source /source/receipt-processor-api/ ./
+# Copy source files required for the build
+COPY ./src ./src
+COPY ./pom.xml ./pom.xml
 RUN mvn clean package
 
 # Run project
