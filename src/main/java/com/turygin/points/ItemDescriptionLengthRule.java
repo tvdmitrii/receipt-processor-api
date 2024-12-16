@@ -23,7 +23,7 @@ public class ItemDescriptionLengthRule implements IPointRule {
             String descriptionTrimmed = item.getShortDescription().trim();
             if(descriptionTrimmed.length() % lengthMultiple == 0) {
                 points += item.getPrice().multiply(priceMultiplier).
-                        setScale(0, RoundingMode.HALF_UP).longValue();
+                        setScale(0, RoundingMode.CEILING).longValue();
             }
         }
         return points;
