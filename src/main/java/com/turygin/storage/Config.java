@@ -5,17 +5,27 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
 import java.math.BigDecimal;
-import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Singleton configuration object that provides receipt storage and rule-based point calculation.
+ */
 public class Config {
 
     private static final Logger LOG = LogManager.getLogger(Config.class);
+
+    /** Singleton instance. */
     private static Config instance = null;
 
+    /** Receipt manager that handles receipt storage. */
     private final ReceiptManager receiptManager;
+
+    /** Point pipeline that handles rule-based point computation. */
     private final PointPipeline pointPipeline;
 
+    /**
+     * Private constructor that initializes receipt manager and point pipeline.
+     */
     private Config() {
         receiptManager = new ReceiptManager();
 
@@ -39,6 +49,10 @@ public class Config {
         );
     }
 
+    /**
+     * Gets singleton configuration instance.
+     * @return singleton configuration instance
+     */
     public static Config getInstance() {
         if (instance == null) {
             instance = new Config();
@@ -47,10 +61,18 @@ public class Config {
         return instance;
     }
 
+    /**
+     * Gets receipt manager.
+     * @return receipt manager object
+     */
     public ReceiptManager getReceiptManager() {
         return receiptManager;
     }
 
+    /**
+     * Gets point pipeline.
+     * @return point pipeline object
+     */
     public PointPipeline getPointPipeline() {
         return pointPipeline;
     }
