@@ -10,6 +10,7 @@ RUN mvn clean package
 FROM eclipse-temurin:21-jdk-alpine
 WORKDIR /app
 COPY --from=build /build/target/receipt-processor-api*.jar api.jar
+COPY --from=build /build/target/lib ./lib
 
 # Expose port 8080
 EXPOSE 8080
